@@ -2,14 +2,14 @@
 
 import socket
 
-HOST = "www.google.com"
-PORT = 80
+HOST = "localhost"
+PORT = 8001
 BUFFER_SIZE = 1024
 
 payload = """GET / HTTP/1.0
-Host: {}
+Host: www.google.com
 
-""".format(HOST)
+"""
 
 def get_request(addr):
 	(family, socktype, proto, canonname, sockaddr) = addr
@@ -38,6 +38,7 @@ def main():
 	addr_info = socket.getaddrinfo(HOST, PORT)
 	for addr in addr_info:
 		(family, socktype, proto, canonname, sockaddr) = addr
+
 		if family == socket.AF_INET and socktype == socket.SOCK_STREAM:
 			print(addr)
 			get_request(addr)
