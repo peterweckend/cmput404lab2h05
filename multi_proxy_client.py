@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import socket
+from multiprocessing import Pool
 
 HOST = "localhost"
 PORT = 8001
@@ -41,6 +42,8 @@ def main():
 
 		if family == socket.AF_INET and socktype == socket.SOCK_STREAM:
 			print(addr)
+			with Pool() as p:
+				p.map(get_request, [addr] * 10)
 			get_request(addr)
 		
 
